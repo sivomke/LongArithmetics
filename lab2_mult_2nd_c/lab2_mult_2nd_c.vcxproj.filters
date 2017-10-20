@@ -27,6 +27,9 @@
     <ClInclude Include="LI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Multiplier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
