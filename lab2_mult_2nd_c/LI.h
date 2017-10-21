@@ -8,12 +8,15 @@ class LI {
 public:
 	
 	LI(long int input);
-	LI() = default;
+	LI(int length,  int def_val);
+	LI();
 	void set_value(long int input);
 	void out();
-	const LI operator+ (const LI & b);
-	const LI operator* (const LI & b);
+	LI  operator+ ( LI & b);
+	//LI  operator* ( LI & b);
+	LI operator = (LI & b);
 	void add_zeros( int add);
+	void erase_zeros();
 private:
 	vector <int> value;
 	const int Base = 10;

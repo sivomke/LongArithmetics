@@ -9,6 +9,18 @@ LI::LI(long int input) {
 	//reverse(value.begin(), value.end());
 }
 
+LI::LI(int length, int def_val): value(length, 0)
+{
+}
+
+
+//LI::LI(int length):value(length, 0)
+//{
+//}
+
+LI::LI():value(0,0)
+{
+}
 
 void LI:: set_value(long int input) {
 	value.push_back(input % this->Base);
@@ -20,43 +32,67 @@ void LI:: set_value(long int input) {
 void LI::out() {
 	reverse(value.begin(), value.end());
 	for (auto elem : value)
-		cout << elem << " ";
+		cout << elem;
 	cout << endl;
-}
+	reverse(value.begin(), value.end());
+} 
 
-const LI LI::operator+(const LI & b)
+LI  LI::operator+( LI & b)
 {
-	
+
 	int n = max(this->value.size(), b.value.size());
-	LI sum;
-	sum.value = vector<int>(n + 1, 0);
+	this->add_zeros(n - this->value.size());
+	b.add_zeros(n - b.value.size());
+	LI sum(n + 1, 0);
 	for (int i = 0; i < n; ++i) {
 		sum.value[i] += (value[i] + b.value[i]) % Base;
 		sum.value[i + 1] = (value[i] + b.value[i]) / Base;
 
 	}
+	this->erase_zeros();
+	b.erase_zeros();
+	sum.erase_zeros();
 	return sum;
 }
 
-const LI LI::operator*(const LI & b)
+
+LI LI::operator=(LI & b)
 {
-	int n = max(this->value.size(), b.value.size());
-	LI mul;
-	mul.value = vector<int>(2*n, 0);
-	for (int i = 0; i < n; ++i) {
-		for (int j = 0; j < n; ++j){
-		
-		}
-		mul.value[i] += (value[i] * b.value[i]) % Base;
-		mul.value[i + 1] += (value[i] * b.value[i]) / Base;
+	this->value = b.value;
+	return LI();
+}
 
 
+
+/*LI  LI::operator*(LI & b)
+{
+	 int l_a = value.size();
+	 int l_b = b.value.size();
+	 cout << value.size() << endl;
+	 cout << b.value.size() << endl;
+	 LI mul(l_a + l_b);
+	 int remember = 0;
+	 for (int j = 0; j < l_b; ++j) {
+		 for (int i=0; i<l_a; ++i){
+			// mul.value[i+j] = remember + (value[i] * b.value[j]) % Base;
+			// remember += (value[i] * b.value[j]) / Base;
+			 mul.value[i + j] += remember + value[i] * b.value[j];
+			 remember = mul.value[i + j] / Base; // base -  база представления числа
+			 mul.value[i + j] %= Base;
+			 mul.value[i + j] += remember;
+		 }
 	}
 	return mul;
 }
-
+ */
 void LI::add_zeros(int add)
 {
 	while (add--)
 		value.push_back(0);
+}
+
+void LI::erase_zeros()
+{
+	while (this->value.back() ==0)
+		this->value.pop_back();
 }

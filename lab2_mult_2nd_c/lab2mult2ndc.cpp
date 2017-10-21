@@ -8,12 +8,10 @@
 
 int main()
 {
-	LI a = 1234642;
-	//a.out();
-	LI b = 14546;
-	//LI c= a + b;
-	b.add_zeros(3);
-	b.out();
+	LI a =123;
+	LI b = 14;
+	LI c = a + b ;
+	c.out();
 	system("pause");
     return 0;
 }
