@@ -134,14 +134,14 @@ void LI::add_zeros(int add)
 void LI::erase_zeros()
 {
 	if (this->value.begin() != this->value.end()) {
-		while (this->value.back() == 0)
+		while (this->value.back() == 0&&this->value.size()!=1) {
 			this->value.pop_back();
+		}
 	}
 }
 
 LI LI::ordinary_mul(LI & b)
 {
-
 	int l_a = value.size();
 
 	int l_b = b.value.size();
@@ -175,8 +175,8 @@ LI LI::ordinary_mul(LI & b)
 
 LI LI::Karatsuba_mul(LI & b)
 {
+
 	int n = max(this->value.size(), b.value.size());
-	cout << n << endl;
 	if (n == 1) return this->ordinary_mul(b);
 	if (n % 2)n += 1; //is odd, makes it even
 	this->add_zeros(n - this->value.size());
@@ -204,14 +204,14 @@ LI LI::Karatsuba_mul(LI & b)
 	return res;	
 }
 
-void LI::left_half(LI & from)
+void LI::right_half(LI & from)
 {
 	int n = from.value.size();
 	for (int i = 0; i < n / 2; ++i)
 		this->value[i] = from.value[i];
 }
 
-void LI::right_half(LI & from)
+void LI::left_half(LI & from)
 {
 	int n = from.value.size();
 	int j = 0;
