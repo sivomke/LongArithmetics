@@ -8,8 +8,8 @@
 
 int main()
 {
-	LI a =1437;
-	LI b = 587;
+	LI a =12564;
+	LI b = 565654;
 	LI c = a * b ;
 	c.out();
 	system("pause");

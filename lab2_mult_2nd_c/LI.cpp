@@ -75,12 +75,13 @@ LI  LI::operator*(LI & b)
 		 for (int i=0; i<l_a+1; ++i){
 			// cout << "j=" << j << " " << "i=" << i << endl;
 			 //cout << "j+i=" << j + i << endl;
-			 mul.value[i+j]+=( remember + value[i] * b.value[j])%Base;
+			 mul.value[i+j]+=( remember + value[i] * b.value[j]);
 			
 			 //cout << value[i] << "*" << b.value[j] << endl;
 			 //cout << "rem_prev: " << remember << endl;
 			 //cout << "write down:" << mul.value[i + j] << endl;
-			 remember = (remember + value[i] * b.value[j] )/ Base;
+			 remember = mul.value[i+j]/ Base;
+			 mul.value[i + j] %= Base;
 			
 			 //cout << "carry:" << remember << endl;
 			/* mul.value[i + j] += remember + value[i] * b.value[j];
