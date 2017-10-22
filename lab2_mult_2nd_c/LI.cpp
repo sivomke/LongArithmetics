@@ -64,27 +64,35 @@ LI LI::operator=(LI & b)
 
 
 
-/*LI  LI::operator*(LI & b)
+LI  LI::operator*(LI & b)
 {
 	 int l_a = value.size();
 	 int l_b = b.value.size();
-	 cout << value.size() << endl;
-	 cout << b.value.size() << endl;
-	 LI mul(l_a + l_b);
+	 LI mul(l_a + l_b, 0);
+	 this->value.push_back(0);
 	 int remember = 0;
 	 for (int j = 0; j < l_b; ++j) {
-		 for (int i=0; i<l_a; ++i){
-			// mul.value[i+j] = remember + (value[i] * b.value[j]) % Base;
-			// remember += (value[i] * b.value[j]) / Base;
-			 mul.value[i + j] += remember + value[i] * b.value[j];
+		 for (int i=0; i<l_a+1; ++i){
+			// cout << "j=" << j << " " << "i=" << i << endl;
+			 //cout << "j+i=" << j + i << endl;
+			 mul.value[i+j]+=( remember + value[i] * b.value[j])%Base;
+			
+			 //cout << value[i] << "*" << b.value[j] << endl;
+			 //cout << "rem_prev: " << remember << endl;
+			 //cout << "write down:" << mul.value[i + j] << endl;
+			 remember = (remember + value[i] * b.value[j] )/ Base;
+			
+			 //cout << "carry:" << remember << endl;
+			/* mul.value[i + j] += remember + value[i] * b.value[j];
 			 remember = mul.value[i + j] / Base; // base -  база представления числа
 			 mul.value[i + j] %= Base;
-			 mul.value[i + j] += remember;
+			 mul.value[i + j] += remember; */
 		 }
 	}
+	 mul.erase_zeros();
 	return mul;
 }
- */
+ 
 void LI::add_zeros(int add)
 {
 	while (add--)

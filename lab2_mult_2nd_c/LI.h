@@ -13,7 +13,7 @@ public:
 	void set_value(long int input);
 	void out();
 	LI  operator+ ( LI & b);
-	//LI  operator* ( LI & b);
+	LI  operator* ( LI & b);
 	LI operator = (LI & b);
 	void add_zeros( int add);
 	void erase_zeros();

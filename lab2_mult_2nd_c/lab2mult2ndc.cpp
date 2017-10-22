@@ -8,9 +8,9 @@
 
 int main()
 {
-	LI a =123;
-	LI b = 14;
-	LI c = a + b ;
+	LI a =1437;
+	LI b = 587;
+	LI c = a * b ;
 	c.out();
 	system("pause");
     return 0;
