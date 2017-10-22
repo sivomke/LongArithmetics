@@ -133,8 +133,10 @@ void LI::add_zeros(int add)
 
 void LI::erase_zeros()
 {
-	while (this->value.back() ==0)
-		this->value.pop_back();
+	if (this->value.begin() != this->value.end()) {
+		while (this->value.back() == 0)
+			this->value.pop_back();
+	}
 }
 
 LI LI::ordinary_mul(LI & b)
@@ -174,22 +176,47 @@ LI LI::ordinary_mul(LI & b)
 LI LI::Karatsuba_mul(LI & b)
 {
 	int n = max(this->value.size(), b.value.size());
+	cout << n << endl;
 	if (n == 1) return this->ordinary_mul(b);
 	if (n % 2)n += 1; //is odd, makes it even
 	this->add_zeros(n - this->value.size());
 	b.add_zeros(n - b.value.size());
-	LI a_left;
-	LI a_right;
-	LI b_left;
-	LI b_right;
-	LI  Prod_1 = a_left.Karatsuba_mul(b_left);
-	LI Prod_2 = a_right.Karatsuba_mul(b_right);
+	LI a_left(n/2, 0);
+	a_left.left_half(*this);
+	LI a_right(n/2, 0);
+	a_right.right_half(*this);
+	LI b_left(n/2 , 0);
+	b_left.left_half(b);
+	LI b_right(n/2 , 0);
+	b_right.right_half(b);
+	LI  Prod_1(n/2 , 0);
+	Prod_1=	a_left.Karatsuba_mul(b_left);
+	LI Prod_2(n/2 , 0);
+	Prod_2 = a_right.Karatsuba_mul(b_right);
 	LI sum_1 = a_left + a_right;
 	LI sum_2 = b_left + b_right;
-	LI Prod_3 = sum_1.Karatsuba_mul(sum_2);
+	LI Prod_3(n / 2 + 1, 0);
+		Prod_3= sum_1.Karatsuba_mul(sum_2);
 	LI ten_in_n = pow(10, n); //10^n
 	LI ten_in_n_over_2 = pow(10, n / 2); //10^(n/2)
-	LI res = Prod_1.ordinary_mul(ten_in_n) + ten_in_n_over_2;
+	LI res(2*n, 0);
+	res	= Prod_1.ordinary_mul(ten_in_n) + ten_in_n_over_2.ordinary_mul(Prod_3-Prod_1-Prod_2)+Prod_2;
+	return res;	
+}
 
-	
+void LI::left_half(LI & from)
+{
+	int n = from.value.size();
+	for (int i = 0; i < n / 2; ++i)
+		this->value[i] = from.value[i];
+}
+
+void LI::right_half(LI & from)
+{
+	int n = from.value.size();
+	int j = 0;
+	for (int i = n / 2; i < n; ++i) {
+		this->value[j] = from.value[i];
+		j++;
+	}
 }

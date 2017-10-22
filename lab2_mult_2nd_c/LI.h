@@ -20,6 +20,8 @@ public:
 	void erase_zeros();
 	LI ordinary_mul(LI& b);
 	LI Karatsuba_mul(LI & b);
+	void left_half(LI &from);
+	void right_half(LI &from);
 private:
 	vector <int> value;
 	const int Base = 10;
