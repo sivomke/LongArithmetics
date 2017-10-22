@@ -55,15 +55,21 @@ LI  LI::operator+( LI & b)
 	return sum;
 }
 
-LI LI::operator-(LI & b)
+LI LI::operator-(LI & b) //works only if a>b!
 {
 	int n = max(this->value.size(), b.value.size());
 	this->add_zeros(n - this->value.size());
 	b.add_zeros(n - b.value.size());
 	LI sub(n + 1, 0);
 	for (int i = 0; i < n; ++i) {
-		sub.value[i] += (value[i] - b.value[i]) % Base;
-		sub.value[i + 1] = (value[i] - b.value[i]) / Base;
+		if (value[i]>=b.value[i])
+			sub.value[i] = (value[i] - b.value[i]) % Base;
+		else {
+			value[i + 1] -= 1%Base; //WHAT TO DO IF THE BASE != 10
+			sub.value[i] = (Base + value[i] - b.value[i])%Base;
+
+		}
+	
 
 	}
 	this->erase_zeros();
