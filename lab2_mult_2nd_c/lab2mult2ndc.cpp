@@ -10,7 +10,7 @@ int main()
 {
 	LI a =12564;
 	LI b = 565654;
-	LI c = a * b ;
+	LI c = b-a;
 	c.out();
 	system("pause");
     return 0;
