@@ -11,9 +11,14 @@ LI::LI(string number)
 		if (48 <= digit&&digit <= 57) {
 			value.push_back(digit - '0');
 		}
-		else { std::cout << "not a number"; }
+		else { std::cout << "not a number"; 
+}
 }
 	reverse(value.begin(), value.end()); //to store it vice versa 
+}
+
+LI::LI(LI & b):value(b.value)
+{
 }
 
 LI::LI(long int input) {
@@ -76,8 +81,8 @@ return false; }
 LI LI::operator-(LI & b)
 {
 	if (this->value.size() < b.value.size() || ((this->value.size() == b.value.size()) && (this->compare_digits(b)))) { 
-		LI sub = b - *this;
-		return sub; }
+		LI sub (*this);
+		return (b-sub); }
 	int n = max(this->value.size(), b.value.size());
 	this->add_zeros(n - this->value.size());
 	b.add_zeros(n - b.value.size());

@@ -11,6 +11,7 @@ public:
 		std::cout <<boolalpha<< (a.value[a.value.size() - 1] == b.value[b.value.size() - 1] )<< endl;
 	} 
 	LI(string number);
+	LI(LI&b);
 	LI(long int input);
 	LI(int length,  int def_val);
 	LI();
@@ -30,6 +31,6 @@ public:
 	bool compare_digits(LI &b);
 private:
 	vector <int> value;
-	const int Base = 10;
+	static const int Base = 10;
 
 };

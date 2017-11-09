@@ -15,7 +15,7 @@ int main()
 	//c.out();
 	//LI d = b.ordinary_mul(a);
 	//d.out();
-	LI v = a - b;
+	LI v =a-b;
 	v.out();
 
 
