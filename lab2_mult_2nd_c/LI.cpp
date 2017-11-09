@@ -4,6 +4,18 @@
 #include <iostream>
 using namespace std;
 
+LI::LI(string number)
+{
+	for (int i = 0; i<number.size(); ++i) {
+		char digit = number[i];
+		if (48 <= digit&&digit <= 57) {
+			value.push_back(digit - '0');
+		}
+		else { std::cout << "not a number"; }
+}
+	reverse(value.begin(), value.end()); //to store it vice versa 
+}
+
 LI::LI(long int input) {
 	set_value(input);
 	//reverse(value.begin(), value.end());
@@ -57,6 +69,7 @@ LI  LI::operator+( LI & b)
 
 LI LI::operator-(LI & b) //works only if a>b!
 {
+	if (this->value.size() < b.value.size()||((this->value.size() == b.value.size())&&(this->value[this->value.size()-1]<b.value[b.value.size() - 1]))) return (b - *this);
 	int n = max(this->value.size(), b.value.size());
 	this->add_zeros(n - this->value.size());
 	b.add_zeros(n - b.value.size());
@@ -209,6 +222,11 @@ void LI::right_half(LI & from)
 	int n = from.value.size();
 	for (int i = 0; i < n / 2; ++i)
 		this->value[i] = from.value[i];
+}
+
+bool LI::Rabin_Miller(LI & is_prime)
+{   
+	return false;
 }
 
 void LI::left_half(LI & from)

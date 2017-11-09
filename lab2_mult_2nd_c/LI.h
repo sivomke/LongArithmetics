@@ -1,12 +1,16 @@
 #pragma once
 #include <vector>
 #include "Multiplier.h"
+#include <iostream>
 using namespace std;
 
 class LI {
 	friend class Multiplier;
 public:
-	
+	static void check(LI a, LI b) {
+		std::cout <<boolalpha<< (a.value[a.value.size() - 1] == b.value[b.value.size() - 1] )<< endl;
+	} 
+	LI(string number);
 	LI(long int input);
 	LI(int length,  int def_val);
 	LI();
@@ -22,6 +26,7 @@ public:
 	LI Karatsuba_mul(LI & b);
 	void left_half(LI &from);
 	void right_half(LI &from);
+	bool Rabin_Miller(LI & is_prime);
 private:
 	vector <int> value;
 	const int Base = 10;

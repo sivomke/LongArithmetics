@@ -9,8 +9,14 @@
 'lab2_mult_2nd_c.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ucrtbased.dll'. Cannot find or open the PDB file.
 'lab2_mult_2nd_c.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ucrtbased.dll'. Cannot find or open the PDB file.
 'lab2_mult_2nd_c.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\ucrtbased.dll'
-The thread 0x1e3c has exited with code 0 (0x0).
-The thread 0x1138 has exited with code 0 (0x0).
-The thread 0x21a0 has exited with code 0 (0x0).
-The thread 0x1b00 has exited with code -1073741510 (0xc000013a).
-The program '[172] lab2_mult_2nd_c.exe' has exited with code -1073741510 (0xc000013a).
+'lab2_mult_2nd_c.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel.appcore.dll'. Cannot find or open the PDB file.
+'lab2_mult_2nd_c.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcrt.dll'. Cannot find or open the PDB file.
+'lab2_mult_2nd_c.exe' (Win32): Loaded 'C:\Windows\SysWOW64\rpcrt4.dll'. Cannot find or open the PDB file.
+'lab2_mult_2nd_c.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sspicli.dll'. Cannot find or open the PDB file.
+'lab2_mult_2nd_c.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cryptbase.dll'. Cannot find or open the PDB file.
+'lab2_mult_2nd_c.exe' (Win32): Loaded 'C:\Windows\SysWOW64\bcryptprimitives.dll'. Cannot find or open the PDB file.
+'lab2_mult_2nd_c.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sechost.dll'. Cannot find or open the PDB file.
+The thread 0x2604 has exited with code 0 (0x0).
+The thread 0x25e4 has exited with code 0 (0x0).
+The thread 0x1d20 has exited with code 0 (0x0).
+The program '[5824] lab2_mult_2nd_c.exe' has exited with code 0 (0x0).
