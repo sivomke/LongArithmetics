@@ -8,18 +8,17 @@ using namespace std;
 
 int main()
 {
-	/* a =149999937;
-	LI b = 998599897;
-	LI c= b.Karatsuba_mul(a);
-	c.out();
-	LI d = b.ordinary_mul(a);
-	d.out();
-	LI v = c - d;
+
+	LI a = "14999997764765543243237";
+	LI b = "99859989876874543566787";
+	//LI c = b.Karatsuba_mul(a);
+	//c.out();
+	//LI d = b.ordinary_mul(a);
+	//d.out();
+	LI v = a - b;
 	v.out();
-	*/
-	LI a = "543243237";
-	LI b = "998599897";
-	LI::check(a, b);
+
+
 	system("pause");
     return 0;
 }

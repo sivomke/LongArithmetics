@@ -27,7 +27,9 @@ public:
 	void left_half(LI &from);
 	void right_half(LI &from);
 	bool Rabin_Miller(LI & is_prime);
+	bool compare_digits(LI &b);
 private:
 	vector <int> value;
 	const int Base = 10;
+
 };

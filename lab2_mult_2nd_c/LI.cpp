@@ -67,9 +67,17 @@ LI  LI::operator+( LI & b)
 	return sum;
 }
 
-LI LI::operator-(LI & b) //works only if a>b!
+bool LI::compare_digits(LI &b){
+for (int i = this->value.size()-1; i >= 0; i--) {
+	if (this->value[i] < b.value[i]) return  true;
+}
+return false; }
+
+LI LI::operator-(LI & b)
 {
-	if (this->value.size() < b.value.size()||((this->value.size() == b.value.size())&&(this->value[this->value.size()-1]<b.value[b.value.size() - 1]))) return (b - *this);
+	if (this->value.size() < b.value.size() || ((this->value.size() == b.value.size()) && (this->compare_digits(b)))) { 
+		LI sub = b - *this;
+		return sub; }
 	int n = max(this->value.size(), b.value.size());
 	this->add_zeros(n - this->value.size());
 	b.add_zeros(n - b.value.size());
