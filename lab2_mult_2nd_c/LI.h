@@ -28,9 +28,12 @@ public:
 	void left_half(LI &from);
 	void right_half(LI &from);
 	bool Rabin_Miller(LI & is_prime);
-	bool compare_digits(LI &b);
-private:
+	bool less(LI &b);
+
 	vector <int> value;
+private:
+
+	LI  substraction(LI &b);
 	static const int Base = 10;
 
 };

@@ -72,12 +72,11 @@ LI  LI::operator+( LI & b)
 	return sum;
 }
 
-bool LI::compare_digits(LI &b){
-for (int i = this->value.size()-1; i >= 0; i--) {
-	if (this->value[i] < b.value[i]) return  true;
-}
-return false; }
 
+
+
+
+/*
 LI LI::operator-(LI & b)
 {
 	if (this->value.size() < b.value.size() || ((this->value.size() == b.value.size()) && (this->compare_digits(b)))) { 
@@ -102,6 +101,54 @@ LI LI::operator-(LI & b)
 	b.erase_zeros();
 	sub.erase_zeros();
 	return sub;
+}
+
+*/
+
+LI  LI::substraction(LI & b)
+{
+	int n = max(this->value.size(), b.value.size());
+	this->add_zeros(n - this->value.size());
+	b.add_zeros(n - b.value.size());
+	LI sub(n + 1, 0);
+	for (int i = 0; i < n; ++i) {
+		if (value[i] >= b.value[i])
+			sub.value[i] = (value[i] - b.value[i]) % Base;
+		else {
+			value[i + 1] -= 1 % Base; //WHAT TO DO IF THE BASE != 10
+			sub.value[i] = (Base + value[i] - b.value[i]) % Base;
+
+		}
+
+
+	}
+	this->erase_zeros();
+	b.erase_zeros();
+	sub.erase_zeros();
+	return sub;
+}
+
+
+bool LI::less(LI &b) {
+
+	if ((this->value.size() < b.value.size())) return true;
+	if ((this->value.size() > b.value.size())) return false;
+	for (int i = this->value.size() - 1; i >= 0; i--) {
+		if (this->value[i] < b.value[i])  return  true;
+		else { if (this->value[i] > b.value[i])  return  false; }
+	}
+	return false;
+
+
+	
+}
+
+LI LI::operator-(LI & b)
+{
+	if (less(b)){
+		return b.substraction(*this);
+	}
+	return this->substraction(b);
 }
 
 
