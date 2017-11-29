@@ -9,15 +9,14 @@ using namespace std;
 int main()
 {
 
-	LI a = "58657574";
-	LI b = "39876576";
-	LI c = b.Karatsuba_mul(a);
-	c.out();
-	LI d = b.ordinary_mul(a);
-	d.out();
-	LI v = c - d;
-	v.out();
+	LI a="52345";
+	LI c= "52346";
+	cout << boolalpha << (a == c) << endl;
+	LI b = "54";
+	a / b;
 
+
+	
 	
 
 

@@ -2,6 +2,7 @@
 #include "LI.h"
 #include <algorithm>
 #include <iostream>
+#include <string>
 using namespace std;
 
 LI::LI(string number)
@@ -158,6 +159,50 @@ LI LI::operator=(LI & b)
 	return LI();
 }
 
+LI LI::operator/(LI & b)
+{
+	int l_a = value.size();
+
+	int l_b = b.value.size();
+	cout << "b.value[0]=" << b.value[0] << endl;
+	cout << "b.value[1]=" << b.value[1] << endl;
+	if (l_a<l_b) return b/(*this);
+	cout << "l_a: " << l_a << endl;
+	cout << "l_b: " << l_b << endl;
+	LI cur(value[l_a - l_b]);
+	for (int i = 1; i <l_b; i++) 
+		cur.value.push_back(value[l_a - l_b + i]);
+	cur.out();
+	if (cur.less(b)) {
+		reverse(cur.value.begin(), cur.value.end());
+		cur.value.push_back(value[l_a - l_b - 1]);
+		reverse(cur.value.begin(), cur.value.end());
+	}
+	cur.out();
+	LI num(1);
+	while (!cur.less(b*num)) {
+		num = num + LI(1);
+	}
+	cout << boolalpha <<"54*9"<< cur.less(b*LI(9)) << endl;
+	cout << boolalpha << "54*10"<<cur.less(b*LI(10)) << endl;
+	cout << boolalpha <<"523<523"<< cur.less(LI(523)) << endl;
+	num.out();
+	num = num - LI(1);
+	LI div = cur - b*num;
+	div.out();
+	return div;
+}
+
+bool LI::operator == (LI & b) {
+	if (value.size() != b.value.size()) return false;
+	else {
+		for (int i = 0; i < value.size(); ++i) {
+			if (value[i] != b.value[i]) return false;
+		}
+	}
+	return true;
+}
+
 
 
 LI  LI::operator*(LI & b)
@@ -284,9 +329,15 @@ void LI::right_half(LI & from)
 		this->value[i] = from.value[i];
 }
 
-bool LI::Rabin_Miller(LI & is_prime)
-{   
-	return false;
+bool LI::Rabin_Miller()
+{
+	cout << value[0] << endl;
+	if (value[0] % 2 == 0) return false;
+	LI sth = *this - LI("1");
+	sth.out();
+		
+	
+	//n-1=2^s*b, b- odd
 }
 
 void LI::left_half(LI & from)

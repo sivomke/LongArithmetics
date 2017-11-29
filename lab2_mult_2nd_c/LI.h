@@ -21,19 +21,19 @@ public:
 	LI  operator- (LI & b);
 	LI  operator* ( LI & b);
 	LI operator = (LI & b);
+	LI operator / (LI & b);
+	bool operator == (LI & b);
 	void add_zeros( int add);
 	void erase_zeros();
 	LI ordinary_mul(LI& b);
 	LI Karatsuba_mul(LI & b);
 	void left_half(LI &from);
 	void right_half(LI &from);
-	bool Rabin_Miller(LI & is_prime);
+	bool Rabin_Miller();
 	bool less(LI &b);
-
+	LI  substraction(LI &b);
 	vector <int> value;
 private:
-
-	LI  substraction(LI &b);
 	static const int Base = 10;
 
 };
