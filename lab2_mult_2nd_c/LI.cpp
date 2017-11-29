@@ -162,13 +162,8 @@ LI LI::operator=(LI & b)
 LI LI::operator/(LI & b)
 {
 	int l_a = value.size();
-
 	int l_b = b.value.size();
-	cout << "b.value[0]=" << b.value[0] << endl;
-	cout << "b.value[1]=" << b.value[1] << endl;
 	if (l_a<l_b) return b/(*this);
-	cout << "l_a: " << l_a << endl;
-	cout << "l_b: " << l_b << endl;
 	LI cur(value[l_a - l_b]);
 	for (int i = 1; i <l_b; i++) 
 		cur.value.push_back(value[l_a - l_b + i]);
@@ -180,15 +175,30 @@ LI LI::operator/(LI & b)
 	}
 	cur.out();
 	LI num(1);
+	num.out();
+	num*b;
+	b.out();
+	num.out();
+	b.erase_zeros();
+	num.erase_zeros();
+	b.out();
+	num.out();
 	while (!cur.less(b*num)) {
+
+		cout << "b.value.size: " << b.value.size() << endl;
+		b.out();
 		num = num + LI(1);
 	}
-	cout << boolalpha <<"54*9"<< cur.less(b*LI(9)) << endl;
-	cout << boolalpha << "54*10"<<cur.less(b*LI(10)) << endl;
-	cout << boolalpha <<"523<523"<< cur.less(LI(523)) << endl;
+	cout << "b.value.size: " << b.value.size() << endl;
 	num.out();
-	num = num - LI(1);
-	LI div = cur - b*num;
+	LI div = num - LI(1);
+	cout << "b.value.size: " << b.value.size() << endl;
+	LI mul = b*num;
+	mul.out();
+	mul.add_zeros(l_a - cur.value.size());
+	mul.out();
+	//LI div = cur - b*num;
+
 	div.out();
 	return div;
 }
@@ -286,7 +296,10 @@ LI LI::ordinary_mul(LI & b)
 
 	}
 
+	
 	mul.erase_zeros();
+	this->erase_zeros();
+	b.erase_zeros();
 
 	return mul;
 }

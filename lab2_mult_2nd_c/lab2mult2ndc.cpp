@@ -10,10 +10,11 @@ int main()
 {
 
 	LI a="52345";
-	LI c= "52346";
-	cout << boolalpha << (a == c) << endl;
+	LI c= "54";
 	LI b = "54";
-	a / b;
+	//a / b;
+	LI(a*b).out();
+	b.out();
 
 
 	
