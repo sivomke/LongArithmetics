@@ -160,12 +160,15 @@ LI LI::operator=(LI & b)
 }
 
 
-void LI::expand_cur(LI & cur,LI & a, LI & b)
+void LI::expand_cur(LI & cur,LI & a, LI & b, int & count_expand)
 {
 	if (cur.less(b)) {
-		reverse(cur.value.begin(), cur.value.end());
-		cur.value.push_back(a.value[a.value.size() - b.value.size()-1]);
-		reverse(cur.value.begin(), cur.value.end());
+		count_expand++;
+		if  (((int)a.value.size() - (int)b.value.size() - count_expand)>=0) {
+			reverse(cur.value.begin(), cur.value.end());
+			cur.value.push_back(a.value[a.value.size() - b.value.size() - count_expand]);
+			reverse(cur.value.begin(), cur.value.end());
+		}
 	}
 }
 
@@ -187,12 +190,14 @@ LI LI::operator/(LI & b)
 	int l_a = value.size();
 	int l_b = b.value.size();
 	if (l_a<l_b) return LI (0);
+	int count_expand = 0;
 	LI cur(value[l_a - l_b]);
 	cout << "currant value ";
 	cur.out();
 	for (int i = 1; i <l_b; i++) 
 		cur.value.push_back(value[l_a - l_b + i]);
-	expand_cur(cur, *this, b);
+	
+	expand_cur(cur, *this, b, count_expand);
 	cout << "currant value ";
 	cur.out();
 	cout << cur.value[0] << endl;
@@ -205,8 +210,28 @@ LI LI::operator/(LI & b)
 
 	cur = cur - mul;
 	cur.out();
-	expand_cur(cur, *this, b);
+	expand_cur(cur, *this, b, count_expand);
 	cur.out();
+	div_vec.push_back(find_multiplier(cur, b));
+
+
+	mul = b*LI(find_multiplier(cur, b));
+	mul.out();
+	cur = cur - mul;
+	cur.out();
+	expand_cur(cur, *this, b, count_expand);
+
+	cur.out();
+	div_vec.push_back(find_multiplier(cur, b));
+
+	mul = b*LI(find_multiplier(cur, b));
+	mul.out();
+	cur = cur - mul;
+	cur.out();
+	cur.out();
+	expand_cur(cur, *this, b, count_expand);
+	cur.out();
+
 	LI div(div_vec);
 	return div;
 
