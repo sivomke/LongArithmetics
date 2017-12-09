@@ -185,53 +185,28 @@ int LI::find_multiplier(LI & cur, LI & b)
 	return res;
 }
 
-LI LI::operator/(LI & b) 
+LI LI::operator/(LI & b)
 {
 	int l_a = value.size();
 	int l_b = b.value.size();
-	if (l_a<l_b) return LI (0);
+	if (l_a < l_b) return LI(0);
+	if (*this == b) return LI(1);
 	int count_expand = 0;
+
+	LI mul;
 	LI cur(value[l_a - l_b]);
-	cout << "currant value ";
-	cur.out();
-	for (int i = 1; i <l_b; i++) 
-		cur.value.push_back(value[l_a - l_b + i]);
-	
+	vector <int> div_vec;
+	if ((l_a - l_b) != value.size() - 1) {
+		for (int i = 1; i < l_b; i++) 
+			cur.value.push_back(value[l_a - l_b + i]);
+	}
+	while ((l_b + count_expand)<value.size()) {
 	expand_cur(cur, *this, b, count_expand);
-	cout << "currant value ";
-	cur.out();
-	cout << cur.value[0] << endl;
-
-
-	vector <int> div_vec(1, find_multiplier(cur, b));
-
-	LI mul = b*LI(div_vec);
-	mul.out();
-
-	cur = cur - mul;
-	cur.out();
-	expand_cur(cur, *this, b, count_expand);
-	cur.out();
 	div_vec.push_back(find_multiplier(cur, b));
-
-
 	mul = b*LI(find_multiplier(cur, b));
-	mul.out();
 	cur = cur - mul;
-	cur.out();
-	expand_cur(cur, *this, b, count_expand);
-
-	cur.out();
-	div_vec.push_back(find_multiplier(cur, b));
-
-	mul = b*LI(find_multiplier(cur, b));
-	mul.out();
-	cur = cur - mul;
-	cur.out();
-	cur.out();
-	expand_cur(cur, *this, b, count_expand);
-	cur.out();
-
+	if (cur == LI(vector<int>(1, 0)))  cur.value.pop_back(); 
+}
 	LI div(div_vec);
 	return div;
 
