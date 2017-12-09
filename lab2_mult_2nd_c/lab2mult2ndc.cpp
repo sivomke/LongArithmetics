@@ -11,8 +11,8 @@ int main()
 
 	LI a="52345";
 	LI b = "54";
-	a / b;
-
+	LI res=a / b;
+	res.out();
 	//LI(a*b).out();
 	//b.out();
 

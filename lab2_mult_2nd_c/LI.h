@@ -15,6 +15,7 @@ public:
 	LI(long int input);
 	LI(int length,  int def_val);
 	LI();
+	LI(vector<int> input);
 	void set_value(long int input);
 	void out();
 	LI  operator+ ( LI & b);
@@ -35,5 +36,7 @@ public:
 	vector <int> value;
 private:
 	static const int Base = 10;
+	static void expand_cur(LI & cur, LI & a, LI & b); //auxiliary for division
+	static int find_multiplier(LI & cur,  LI & b); //auxiliary for division
 
 };

@@ -159,32 +159,62 @@ LI LI::operator=(LI & b)
 	return LI();
 }
 
-LI LI::operator/(LI & b) 
+
+void LI::expand_cur(LI & cur,LI & a, LI & b)
 {
-	int l_a = value.size();
-	int l_b = b.value.size();
-	if (l_a<l_b) return b/(*this);
-	LI cur(value[l_a - l_b]);
-	for (int i = 1; i <l_b; i++) 
-		cur.value.push_back(value[l_a - l_b + i]);
 	if (cur.less(b)) {
 		reverse(cur.value.begin(), cur.value.end());
-		cur.value.push_back(value[l_a - l_b - 1]);
+		cur.value.push_back(a.value[a.value.size() - b.value.size()-1]);
 		reverse(cur.value.begin(), cur.value.end());
 	}
+}
+
+int LI::find_multiplier(LI & cur, LI & b)
+{
 	LI num(1);
 	LI one(1);
 	while (!cur.less(num*b)) {
 		num = num + one;
-}
-	LI div = num-one;
-	LI mul = b*div;
-	reverse(mul.value.begin(), mul.value.end());
-	mul.add_zeros(l_a - cur.value.size());
-	reverse(mul.value.begin(), mul.value.end());
-	div.out();
+	}
+	num = num - one;
+	int res = num.value[0];
 
+	return res;
+}
+
+LI LI::operator/(LI & b) 
+{
+	int l_a = value.size();
+	int l_b = b.value.size();
+	if (l_a<l_b) return LI (0);
+	LI cur(value[l_a - l_b]);
+	cout << "currant value ";
+	cur.out();
+	for (int i = 1; i <l_b; i++) 
+		cur.value.push_back(value[l_a - l_b + i]);
+	expand_cur(cur, *this, b);
+	cout << "currant value ";
+	cur.out();
+	cout << cur.value[0] << endl;
+
+
+	vector <int> div_vec(1, find_multiplier(cur, b));
+
+	LI mul = b*LI(div_vec);
+	mul.out();
+
+	cur = cur - mul;
+	cur.out();
+	expand_cur(cur, *this, b);
+	cur.out();
+	LI div(div_vec);
 	return div;
+
+}
+
+LI::LI(vector<int> input) {
+	reverse(input.begin(), input.end());
+	this->value = input;
 }
 
 bool LI::operator == (LI & b) {
