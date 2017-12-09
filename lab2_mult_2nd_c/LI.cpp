@@ -108,22 +108,22 @@ LI LI::operator-(LI & b)
 
 LI  LI::substraction(LI & b)
 {
-	int n = max(this->value.size(), b.value.size());
-	this->add_zeros(n - this->value.size());
+	LI a_copy = (*this);
+	int n = max(a_copy.value.size(), b.value.size());
+	a_copy.add_zeros(n - a_copy.value.size());
 	b.add_zeros(n - b.value.size());
 	LI sub(n + 1, 0);
 	for (int i = 0; i < n; ++i) {
-		if (value[i] >= b.value[i])
-			sub.value[i] = (value[i] - b.value[i]) % Base;
+		if (a_copy.value[i] >= b.value[i])
+			sub.value[i] = (a_copy.value[i] - b.value[i]) % Base;
 		else {
-			value[i + 1] -= 1 % Base; //WHAT TO DO IF THE BASE != 10
-			sub.value[i] = (Base + value[i] - b.value[i]) % Base;
+			a_copy.value[i + 1] -= 1 % Base; //WHAT TO DO IF THE BASE != 10
+			sub.value[i] = (Base + a_copy.value[i] - b.value[i]) % Base;
 
 		}
 
 
 	}
-	this->erase_zeros();
 	b.erase_zeros();
 	sub.erase_zeros();
 	return sub;
@@ -159,7 +159,7 @@ LI LI::operator=(LI & b)
 	return LI();
 }
 
-LI LI::operator/(LI & b)
+LI LI::operator/(LI & b) 
 {
 	int l_a = value.size();
 	int l_b = b.value.size();
@@ -167,39 +167,23 @@ LI LI::operator/(LI & b)
 	LI cur(value[l_a - l_b]);
 	for (int i = 1; i <l_b; i++) 
 		cur.value.push_back(value[l_a - l_b + i]);
-	cur.out();
 	if (cur.less(b)) {
 		reverse(cur.value.begin(), cur.value.end());
 		cur.value.push_back(value[l_a - l_b - 1]);
 		reverse(cur.value.begin(), cur.value.end());
 	}
-	cur.out();
 	LI num(1);
-	num.out();
-	num*b;
-	b.out();
-	num.out();
-	b.erase_zeros();
-	num.erase_zeros();
-	b.out();
-	num.out();
-	while (!cur.less(b*num)) {
-
-		cout << "b.value.size: " << b.value.size() << endl;
-		b.out();
-		num = num + LI(1);
-	}
-	cout << "b.value.size: " << b.value.size() << endl;
-	num.out();
-	LI div = num - LI(1);
-	cout << "b.value.size: " << b.value.size() << endl;
-	LI mul = b*num;
-	mul.out();
+	LI one(1);
+	while (!cur.less(num*b)) {
+		num = num + one;
+}
+	LI div = num-one;
+	LI mul = b*div;
+	reverse(mul.value.begin(), mul.value.end());
 	mul.add_zeros(l_a - cur.value.size());
-	mul.out();
-	//LI div = cur - b*num;
-
+	reverse(mul.value.begin(), mul.value.end());
 	div.out();
+
 	return div;
 }
 
@@ -249,7 +233,8 @@ LI  LI::operator*(LI & b)
 	}
 
 	mul.erase_zeros();
-
+	this->erase_zeros();
+	b.erase_zeros();
 	return mul;
 }
  

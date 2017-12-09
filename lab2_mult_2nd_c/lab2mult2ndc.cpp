@@ -10,11 +10,11 @@ int main()
 {
 
 	LI a="52345";
-	LI c= "54";
 	LI b = "54";
-	//a / b;
-	LI(a*b).out();
-	b.out();
+	a / b;
+
+	//LI(a*b).out();
+	//b.out();
 
 
 	

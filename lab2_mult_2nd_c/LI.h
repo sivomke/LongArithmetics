@@ -21,7 +21,7 @@ public:
 	LI  operator- (LI & b);
 	LI  operator* ( LI & b);
 	LI operator = (LI & b);
-	LI operator / (LI & b);
+	LI operator / (LI & b) ;
 	bool operator == (LI & b);
 	void add_zeros( int add);
 	void erase_zeros();
