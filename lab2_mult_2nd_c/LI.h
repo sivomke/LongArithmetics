@@ -35,9 +35,10 @@ public:
 	LI  substraction(LI &b);
 	vector <int> value;
 
-	int find_power_of_2();//auillary for Rabin Miller
+
 private:
 	static const int Base = 10;
+	int find_power_of_2(int&odd_component);//auxillary for Rabin Miller
 	static void expand_cur(LI & cur, LI & a, LI & b, int & count_expand); //auxiliary for division
 	static int find_multiplier(LI & cur,  LI & b); //auxiliary for division
 

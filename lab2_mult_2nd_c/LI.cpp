@@ -363,25 +363,40 @@ void LI::right_half(LI & from)
 		this->value[i] = from.value[i];
 }
 
-int LI::find_power_of_2() {
+int LI::find_power_of_2(int&odd_component) {
 	int s=0;
 	LI two(2);
 	LI a(*this);
+	string odd = "";
 	while ((a.value[0] % 2) == 0) {
 		a = a / two;
 		s++;
 	}
+	cout << "what has left ";
+	a.out();
+	for (int i = 0; i < a.value.size(); ++i) {
+		int tmp = a.value.back();
+		a.value.pop_back();
+		odd += to_string(tmp);
+	}
+	odd_component =stoi(odd);
 	return s;
 }
 
+
+
 bool LI::Rabin_Miller()
 {
+	int odd_component = 0;
 	cout << value[0] << endl;
 	if ((value.size() == 1) && (value[0] == 2)) return true;
 	else if (value[0] % 2 == 0) return false;
 	else {
 		LI sth = *this - LI("1");
 		sth.out();
+		int s=sth.find_power_of_2(odd_component);
+		cout << "s: " << s << endl;
+		cout << "odd component: " << odd_component << endl;
 
 		return false;
 		//n-1=2^s*b, b- odd
