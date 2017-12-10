@@ -372,18 +372,31 @@ int LI::find_power_of_2(int&odd_component) {
 		a = a / two;
 		s++;
 	}
-	cout << "what has left ";
-	a.out();
-	for (int i = 0; i < a.value.size(); ++i) {
-		int tmp = a.value.back();
-		a.value.pop_back();
-		odd += to_string(tmp);
-	}
-	odd_component =stoi(odd);
+
+	odd_component = a.LI_to_int();
 	return s;
 }
 
 
+int LI::LI_to_int() {
+	int res = 0;
+	string tmp = "";
+	LI a(*this);
+	int j = this->value.size();
+	for (int i = 0; i < j; ++i) {
+		int num = a.value.back();
+		a.value.pop_back();
+		tmp += to_string(num);
+	}
+	res = stoi(tmp);
+	return res;
+}
+
+int LI::sufficient_loop_num() {
+	LI a(*this);
+	int num = a.LI_to_int();
+	return static_cast<int>(log(num) / log(2));
+}
 
 bool LI::Rabin_Miller()
 {
@@ -397,7 +410,8 @@ bool LI::Rabin_Miller()
 		int s=sth.find_power_of_2(odd_component);
 		cout << "s: " << s << endl;
 		cout << "odd component: " << odd_component << endl;
-
+		int k = this->sufficient_loop_num();
+		cout << "k " << k << endl;
 		return false;
 		//n-1=2^s*b, b- odd
 	}

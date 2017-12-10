@@ -34,10 +34,12 @@ public:
 	bool less(LI &b);
 	LI  substraction(LI &b);
 	vector <int> value;
+	int LI_to_int(); //auxillary for Rabin Miller but can be used independently
 
 
 private:
 	static const int Base = 10;
+	int sufficient_loop_num(); //auxillary for Rabin Miller
 	int find_power_of_2(int&odd_component);//auxillary for Rabin Miller
 	static void expand_cur(LI & cur, LI & a, LI & b, int & count_expand); //auxiliary for division
 	static int find_multiplier(LI & cur,  LI & b); //auxiliary for division

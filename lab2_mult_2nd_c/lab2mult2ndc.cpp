@@ -30,7 +30,7 @@ int main()
 	
 	*/
 
-	cout <<static_cast<int>( log(53)/log(2)) << endl;
+	
 
 
 
