@@ -9,12 +9,9 @@ using namespace std;
 int main()
 {
 
-	LI a="52345";
-	LI b = "7642";
-	LI res=a / b;
-	res.out();
-	a.out();
-	b.out();
+	LI a="4294967296";
+	LI b = "8";
+	cout << a.find_power_of_2() << endl;
 	//LI(a*b).out();
 	//b.out();
 

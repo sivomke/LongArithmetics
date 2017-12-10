@@ -189,13 +189,19 @@ LI LI::operator/(LI & b)
 {
 	int l_a = value.size();
 	int l_b = b.value.size();
+	vector <int> div_vec;
 	if (l_a < l_b) return LI(0);
 	if (*this == b) return LI(1);
+	if ((l_a == 1) && (l_b == 1)) {
+		div_vec.push_back(find_multiplier(*this, b));
+		LI div(div_vec);
+		return div;
+
+	}
 	int count_expand = 0;
 
 	LI mul;
 	LI cur(value[l_a - l_b]);
-	vector <int> div_vec;
 	if ((l_a - l_b) != value.size() - 1) {
 		for (int i = 1; i < l_b; i++) 
 			cur.value.push_back(value[l_a - l_b + i]);
@@ -357,15 +363,29 @@ void LI::right_half(LI & from)
 		this->value[i] = from.value[i];
 }
 
+int LI::find_power_of_2() {
+	int s=0;
+	LI two(2);
+	LI a(*this);
+	while ((a.value[0] % 2) == 0) {
+		a = a / two;
+		s++;
+	}
+	return s;
+}
+
 bool LI::Rabin_Miller()
 {
 	cout << value[0] << endl;
-	if (value[0] % 2 == 0) return false;
-	LI sth = *this - LI("1");
-	sth.out();
-		
-	
-	//n-1=2^s*b, b- odd
+	if ((value.size() == 1) && (value[0] == 2)) return true;
+	else if (value[0] % 2 == 0) return false;
+	else {
+		LI sth = *this - LI("1");
+		sth.out();
+
+		return false;
+		//n-1=2^s*b, b- odd
+	}
 }
 
 void LI::left_half(LI & from)
