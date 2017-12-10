@@ -427,17 +427,16 @@ mt19937 generator(rand_dev());
 bool LI::Rabin_Miller()
 {
 	int odd_component = 0;
-	cout << value[0] << endl;
+
 
 	LI sth = *this - LI("1");
-	sth.out();
+
 	int s = sth.find_power_of_2(odd_component);
-	cout << "s: " << s << endl;
-	cout << "odd component: " << odd_component << endl;
+
 	int k = this->sufficient_loop_num();
-	cout << "k " << k << endl;
+
 	int n_1 = sth.LI_to_int();
-	cout << "n-1 " << n_1 << endl;
+
 
 	uniform_int_distribution<int> distribution(2, (n_1 - 1));
 
@@ -445,48 +444,30 @@ bool LI::Rabin_Miller()
 	else if (value[0] % 2 == 0) return false;
 	else {
 		for (int i = 0; i < k; ++i) {
-			cout << "loop 1" << endl;
-			cout << "i " << i << endl;
 			int a = distribution(generator);
-			cout << "a " << a << endl;
 			LI a_(a);
 			a_ = a_.power(odd_component);
-			a_.out();
 			LI x = 0;
-			cout << boolalpha << "a_ less than this " << a_.less(*this) << endl;
 			if (a_.less(*this))  x=a_;
 			else {
 				LI tmp1 = a_ / (*this);
 				x = a_ - tmp1*(*this); }
-			cout << "x: ";
-			x.out();
 			if ((x == LI(1)) || (x == sth)) continue;
 			else {
 				for (int j = 0; j <( s - 1); ++j) {
-					cout << "j " << j << endl;
-					cout << "loop 2" << endl;
 					x = x*x;
-					cout << "x^2 ";
-					x.out();
-					cout << boolalpha << "x less than this " << x.less(*this) << endl;
 					if (x.less(*this)) LI x = x;
 					else { 
 						LI tmp = x / (*this);
 						x = x - tmp*(*this); 
 					}
-					cout << "module ";
-					x.out();
-					cout << boolalpha << "x less than this " << x.less(*this) << endl;
 					if (x == LI(1)) return false;
 					else if (x == sth) goto label;
 				}
-				cout << "out of second loop" << endl;
-
 				return false;
 			}
 
-			cout << "continue or break worked" << endl;
-		label: cout<<"label\n";
+		label:;
 		}
 		return true;
 		//n-1=2^s*b, b- odd

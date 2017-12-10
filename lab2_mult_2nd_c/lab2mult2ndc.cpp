@@ -10,18 +10,23 @@ using namespace std;
 
 int main()
 {
-	/*random_device rand_dev;
-	mt19937 generator(rand_dev());
-	uniform_int_distribution<int> distribution(2, (17));
-	for (int i = 0; i < 17; ++i) {
-		cout<<distribution(generator)<<" ";
-	}
-	*/
-	LI a="113";
-	LI b = "8";
-
-	cout << boolalpha << a.Rabin_Miller() << endl;;
-
+	LI a = "52345";
+	LI b = "54";
+	cout << "52345/54=";
+	(a / b).out();
+	LI d = "149";
+	if (d.Rabin_Miller()) cout << "d is probably prime." << endl;
+	else cout<<"d is composite." << endl;
+	LI k = "221";
+	if (k.Rabin_Miller()) cout << "k is probably prime." << endl;
+	else cout << "k is composite." << endl;
+	LI e = "54637827";
+	LI f = "75687649"; //max length for mine Karatsuba :(
+    LI g=e*f;
+	LI h = e.Karatsuba_mul(f);
+	g.out();
+	h.out();
+	(g - h).out();
 	system("pause");
     return 0;
 }
