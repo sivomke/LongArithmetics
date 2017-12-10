@@ -398,6 +398,24 @@ int LI::sufficient_loop_num() {
 	return static_cast<int>(log(num) / log(2));
 }
 
+int LI::random_in_segment(int left_bound, int right_bound) {
+	random_device random_device; 
+	mt19937 generator(random_device()); 
+	uniform_int_distribution<> distribution(left_bound, right_bound);
+    return distribution(generator); 
+}
+
+
+LI LI::power(int k) {
+	LI a(*this);
+	if (k == 0) return LI(1);
+	LI tmp(*this);
+	for (int i = 0; i < k-1; ++i) {
+		tmp = tmp*a;
+	}
+	return tmp;
+}
+
 bool LI::Rabin_Miller()
 {
 	int odd_component = 0;
@@ -412,7 +430,31 @@ bool LI::Rabin_Miller()
 		cout << "odd component: " << odd_component << endl;
 		int k = this->sufficient_loop_num();
 		cout << "k " << k << endl;
-		return false;
+		int n_1 = sth.LI_to_int();
+		cout << "n-1 " << n_1 << endl;
+		for (int i = 0; i < k; ++i) {
+			cout << "loop 1" << endl;
+			int a = random_in_segment(2, (n_1 - 1));
+			cout << "a " << a << endl;
+			LI a_(a);
+			a_ = a_.power(odd_component);
+			a_.out();
+			LI x = a_ - (a_ / (*this))*(*this);
+			x.out();
+			if ((x == LI(1)) || (x == sth)) continue;
+			
+			for (int j = 0; j < s - 1; ++j) {
+				cout << "loop 2" << endl;
+			  x = x*x - (x*x / (*this))*(*this);
+			  if (x == LI(1)) return false;
+			  else if (x == sth) break;
+			  return 0;
+			}
+
+			cout << "continue or break worked" << endl;
+
+		}
+		return true;
 		//n-1=2^s*b, b- odd
 	}
 }

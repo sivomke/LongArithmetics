@@ -11,9 +11,10 @@ using namespace std;
 int main()
 {
 
-	LI a="53";
+	LI a="17";
 	LI b = "8";
-	a.Rabin_Miller();
+	cout << boolalpha << a.Rabin_Miller() << endl;;
+	
 	//LI(a*b).out();
 	//b.out();
 

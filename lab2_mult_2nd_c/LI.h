@@ -2,6 +2,7 @@
 #include <vector>
 #include "Multiplier.h"
 #include <iostream>
+#include <random>
 using namespace std;
 
 class LI {
@@ -35,6 +36,7 @@ public:
 	LI  substraction(LI &b);
 	vector <int> value;
 	int LI_to_int(); //auxillary for Rabin Miller but can be used independently
+	LI power(int k);
 
 
 private:
@@ -43,6 +45,7 @@ private:
 	int find_power_of_2(int&odd_component);//auxillary for Rabin Miller
 	static void expand_cur(LI & cur, LI & a, LI & b, int & count_expand); //auxiliary for division
 	static int find_multiplier(LI & cur,  LI & b); //auxiliary for division
+	static int random_in_segment(int left_bound, int right_bound); //auxillary for Rabin Miller , not mine generator
 
 
 };
