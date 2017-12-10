@@ -10,31 +10,17 @@ using namespace std;
 
 int main()
 {
-
-	LI a="17";
-	LI b = "8";
-	cout << boolalpha << a.Rabin_Miller() << endl;;
-	
-	//LI(a*b).out();
-	//b.out();
-
-/*	std::random_device random_device; // Источник энтропии.
-	std::mt19937 generator(random_device()); // Генератор случайных чисел.
-											 // (Здесь берется одно инициализирующее значение, можно брать больше)
-
-	std::uniform_int_distribution<> distribution(2, 51); // Равномерное распределение [10, 20]
-	for (int i = 0; i < 40; ++i) {
-		int x = distribution(generator); // Случайное число.
-		std::cout << x << '\n';
-
+	/*random_device rand_dev;
+	mt19937 generator(rand_dev());
+	uniform_int_distribution<int> distribution(2, (17));
+	for (int i = 0; i < 17; ++i) {
+		cout<<distribution(generator)<<" ";
 	}
-	
 	*/
+	LI a="113";
+	LI b = "8";
 
-	
-
-
-
+	cout << boolalpha << a.Rabin_Miller() << endl;;
 
 	system("pause");
     return 0;
